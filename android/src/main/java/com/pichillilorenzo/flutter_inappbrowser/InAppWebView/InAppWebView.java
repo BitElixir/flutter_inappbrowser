@@ -449,7 +449,7 @@ public class InAppWebView extends WebView {
   }
 
   public void injectScriptCode(String source, MethodChannel.Result result) {
-    String jsWrapper = "(function(){return JSON.stringify(eval(%s));})();";
+    String jsWrapper = "(function(){ %s })();";
     injectDeferredObject(source, jsWrapper, result);
   }
 
