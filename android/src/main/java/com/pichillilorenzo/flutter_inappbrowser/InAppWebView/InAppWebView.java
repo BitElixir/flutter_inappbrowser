@@ -451,8 +451,10 @@ public class InAppWebView extends WebView {
   }
 
   public void injectScriptCode(String source, MethodChannel.Result result) {
-    String jsWrapper = "(function(){ %s })();";
-    injectDeferredObject(source, jsWrapper, result);
+    // String jsWrapper = "(function(){ %s })();";
+    String newSource = "(function(){ " + source + " })();";
+    // injectDeferredObject(source, jsWrapper, result);
+    injectDeferredObject(newSource, null, result);
   }
 
   public void injectScriptFile(String urlFile) {
