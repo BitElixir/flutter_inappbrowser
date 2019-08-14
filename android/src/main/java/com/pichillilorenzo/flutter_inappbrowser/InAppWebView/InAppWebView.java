@@ -402,7 +402,7 @@ public class InAppWebView extends WebView {
       @Override
       public void run() {
         Log.d(LOG_TAG, "injectDeferredObject.run");
-        Log.d(LOG_TAG, scriptToInject);
+        Log.d(LOG_TAG, finalScriptToInject);
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
           // This action will have the side-effect of blurring the currently focused element
           loadUrl("javascript:" + finalScriptToInject);
