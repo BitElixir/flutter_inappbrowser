@@ -432,8 +432,8 @@ public class InAppWebView: WKWebView, UIScrollViewDelegate, WKUIDelegate, WKNavi
         if sourceArrayString != nil {
             let sourceString: String? = (sourceArrayString! as NSString).substring(with: NSRange(location: 1, length: (sourceArrayString?.count ?? 0) - 2))
             var jsToInject = sourceString!
-            if jsWrapper != nil {
-                jsToInject = String(format: jsWrapper, sourceString!)
+            if let wrapper = jsWrapper {
+                jsToInject = String(format: wrapper, sourceString!)
             }
             
             evaluateJavaScript(jsToInject, completionHandler: {(value, error) in
