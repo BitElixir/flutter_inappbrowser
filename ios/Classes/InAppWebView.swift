@@ -468,7 +468,7 @@ public class InAppWebView: WKWebView, UIScrollViewDelegate, WKUIDelegate, WKNavi
     
     public func injectScriptCode(source: String, result: FlutterResult?) {
         let jsWrapper = "(function(){ %@ })();"
-        print(jsWrapper)
+        print(source)
         injectDeferredObject(source: source, withWrapper: jsWrapper, result: result)
     }
     
