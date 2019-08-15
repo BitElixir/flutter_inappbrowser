@@ -431,7 +431,7 @@ public class InAppWebView: WKWebView, UIScrollViewDelegate, WKUIDelegate, WKNavi
         let sourceArrayString = String(data: jsonData!, encoding: String.Encoding.utf8)
         if sourceArrayString != nil {
             let sourceString: String? = (sourceArrayString! as NSString).substring(with: NSRange(location: 1, length: (sourceArrayString?.count ?? 0) - 2))
-            let jsToInject = sourceString!
+            var jsToInject = sourceString!
             if jsWrapper != nil {
                 jsToInject = String(format: jsWrapper, sourceString!)
             }
