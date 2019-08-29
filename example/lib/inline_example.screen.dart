@@ -55,8 +55,8 @@ class _InlineExampleScreenState extends State<InlineExampleScreen> {
               BoxDecoration(border: Border.all(color: Colors.blueAccent)),
           child: InAppWebView(
             //initialUrl: "https://www.youtube.com/embed/M7lc1UVf-VE?playsinline=1",
-            //initialUrl: "https://flutter.dev/",
-            initialFile: "assets/index.html",
+            initialUrl: "https://flutter.dev/",
+            //initialFile: "assets/index.html",
             initialHeaders: {},
             initialOptions: {
               //"mediaPlaybackRequiresUserGesture": false,
@@ -84,6 +84,10 @@ class _InlineExampleScreenState extends State<InlineExampleScreen> {
             },
             onLoadStop: (InAppWebViewController controller, String url) async {
               print("stopped $url");
+
+              await this.webView.injectScriptCode("""
+                document.getElementsByClassName('site-banner--default')[0].innerHTML='Suck it!';
+              """);
             },
             onProgressChanged:
                 (InAppWebViewController controller, int progress) {
@@ -96,12 +100,12 @@ class _InlineExampleScreenState extends State<InlineExampleScreen> {
               controller.loadUrl(url);
             },
             onLoadResource: (InAppWebViewController controller, WebResourceResponse response, WebResourceRequest request) {
-              print("Started at: " +
-                  response.startTime.toString() +
-                  "ms ---> duration: " +
-                  response.duration.toString() +
-                  "ms " +
-                  response.url);
+              // print("Started at: " +
+              //     response.startTime.toString() +
+              //     "ms ---> duration: " +
+              //     response.duration.toString() +
+              //     "ms " +
+              //     response.url);
             },
             onConsoleMessage: (InAppWebViewController controller, ConsoleMessage consoleMessage) {
               print("""

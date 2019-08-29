@@ -426,14 +426,15 @@ public class InAppWebView: WKWebView, UIScrollViewDelegate, WKUIDelegate, WKNavi
         }
     }
     
-        public func injectDeferredObject(source: String, withWrapper jsWrapper: String, result: FlutterResult?) {
+    public func injectDeferredObject(source: String, withWrapper jsWrapper: String?, result: FlutterResult?) {
         let jsonData: Data? = try? JSONSerialization.data(withJSONObject: [source], options: [])
         let sourceArrayString = String(data: jsonData!, encoding: String.Encoding.utf8)
         if sourceArrayString != nil {
             let sourceString: String? = (sourceArrayString! as NSString).substring(with: NSRange(location: 1, length: (sourceArrayString?.count ?? 0) - 2))
-            let jsToInject = String(format: jsWrapper, sourceString!)
-            
-            print(jsToInject)
+            var jsToInject: String = source;
+            if jsWrapper != nil {
+                jsToInject = String(format: jsWrapper!, sourceString!)
+            }
             evaluateJavaScript(jsToInject, completionHandler: {(value, error) in
                 if result == nil {
                     return
@@ -468,8 +469,8 @@ public class InAppWebView: WKWebView, UIScrollViewDelegate, WKUIDelegate, WKNavi
     
     public func injectScriptCode(source: String, result: FlutterResult?) {
         let jsWrapper = "(function(){ %@ })();"
-        print(source)
-        injectDeferredObject(source: source, withWrapper: jsWrapper, result: result)
+        let newSource = String(format: jsWrapper, source);
+        injectDeferredObject(source: newSource, withWrapper: nil, result: result)
     }
     
     public func injectScriptFile(urlFile: String) {

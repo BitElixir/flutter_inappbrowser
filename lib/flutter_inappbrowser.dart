@@ -1137,7 +1137,7 @@ class InAppWebViewController {
       _inAppBrowser._throwIsNotOpened();
       args.putIfAbsent('uuid', () => _inAppBrowserUuid);
     }
-    args.putIfAbsent('source', () => source);
+    args.putIfAbsent('source', () => source.trim());
     return await _channel.invokeMethod('injectScriptCode', args);
   }
 
