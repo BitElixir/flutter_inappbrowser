@@ -214,6 +214,10 @@ public class InAppWebViewClient extends WebViewClient {
     // https://issues.apache.org/jira/browse/CB-11248
     view.clearFocus();
     view.requestFocus();
+    
+    // https://stackoverflow.com/a/21918020
+    view.scrollTo(1, 0);
+    view.scrollTo(0, 0);
 
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
       view.evaluateJavascript(InAppWebView.consoleLogJS, null);
